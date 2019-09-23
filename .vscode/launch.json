@@ -1,0 +1,103 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - test",
+            "request": "launch",
+            "mainClass": "com.Ray.test",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HashUtils",
+            "console": "internalConsole",
+            "request": "launch",
+            "mainClass": "com.Ray.Utils.HashUtils",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SMTree",
+            "console": "internalConsole",
+            "request": "launch",
+            "mainClass": "com.Ray.SMTree.SMTree",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SqlDB",
+            "request": "launch",
+            "mainClass": "com.Ray.Libra.SqlDB",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - UITEST",
+            "console": "integratedTerminal",
+            "request": "launch",
+            "mainClass": "com.Ray.Libra.UITEST",
+            "projectName": "testFBHTree",
+            "vmArgs": "-Xmx4096m -Xms300m"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MySQLDemo",
+            "request": "launch",
+            "mainClass": "com.Ray.MySQLDemo",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - AccountResource",
+            "request": "launch",
+            "mainClass": "com.Ray.Libra.LedgerState.AccountResource",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TESTLS",
+            "request": "launch",
+            "mainClass": "com.Ray.TESTLS",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - LedgerState",
+            "request": "launch",
+            "mainClass": "com.Ray.Libra.LedgerState.LedgerState",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - AccountResource",
+            "request": "launch",
+            "mainClass": "com.Ray.Libra.AccountResource",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - StringUtils",
+            "request": "launch",
+            "mainClass": "com.Ray.Utils.StringUtils",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-App<testFBHTree>",
+            "request": "launch",
+            "mainClass": "com.Ray.App",
+            "projectName": "testFBHTree"
+        }
+    ]
+}
