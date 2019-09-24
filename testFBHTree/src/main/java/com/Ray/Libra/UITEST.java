@@ -17,6 +17,12 @@ public class UITEST {
      */
     public static String showText = "";
 
+    private static final long MEGABYTE = 1024L * 1024L;
+
+    public static long bytesToMegabytes(long bytes) {
+        return bytes / MEGABYTE;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
@@ -49,7 +55,7 @@ public class UITEST {
         showText += "p t <account>\t| 暫時測試用\n";
         showText += "p t al\t| 暫時測試用\n";
         showText += "p rh\t| 輸出目前 LedgerState 的 rootHash\n";
-        if(now_tree.equals("smt")){
+        if (now_tree.equals("smt")) {
             showText += "p d\t| 列出SMT最大樹深與平均樹深\n";
         }
         showText += "\n";
@@ -78,7 +84,18 @@ public class UITEST {
                     if (tokens.length == 3) { // 第三個參數有被輸入
                         num = Integer.parseInt(tokens[2]);
                     }
+
                     ls.CreatePseudoAccount(num);
+
+                    // Get the Java runtime
+                    Runtime runtime = Runtime.getRuntime();
+                    // Run the garbage collector
+                    runtime.gc();
+                    // Calculate the used memory
+                    long memory = runtime.totalMemory() - runtime.freeMemory();
+                    System.out.println("Used memory is bytes: " + memory +" Byte");
+                    System.out.println("Used memory is megabytes: " + bytesToMegabytes(memory)+" MB");
+
                     time = System.nanoTime() - time;
                     System.out.println("總執行時間： " + (double) time / 1000000 + " ms");
                     break;
@@ -140,7 +157,7 @@ public class UITEST {
                             ls.P2PTransaction(Account1, Account2, 10);
                             ls.P2PTransaction(Account2, Account1, 10);
 
-                            for (int j=0;j<String.valueOf(i).length();j++) {
+                            for (int j = 0; j < String.valueOf(i).length(); j++) {
                                 System.out.print("\b");
                             }
                         }

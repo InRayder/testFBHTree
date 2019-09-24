@@ -31,7 +31,7 @@ public class LedgerState {
     IMTree imt = new IMTree(tree_h);
     SMTree smt = new SMTree();
     boolean isIMT;// true == IMT, false == SMT
-    boolean isNoStore = false;
+    boolean isNoStore = true;
 
     public LedgerState(String tree) {
         System.out.println("該次的樹為 " + tree);
