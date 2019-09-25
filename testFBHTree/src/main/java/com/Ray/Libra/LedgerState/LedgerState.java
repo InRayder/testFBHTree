@@ -31,7 +31,8 @@ public class LedgerState {
     IMTree imt = new IMTree(tree_h);
     SMTree smt = new SMTree();
     boolean isIMT;// true == IMT, false == SMT
-    boolean isNoStore = true;
+    boolean isNoStore = false;
+    boolean isNoSQL = true;
 
     public LedgerState(String tree) {
         System.out.println("該次的樹為 " + tree);
@@ -208,7 +209,9 @@ public class LedgerState {
             updateIMTToObject(imt);
             updateSMTToObject(smt);
             updateKeysToObject(keys);
-            DB.rmAllAccount();
+            if(!isNoSQL){
+                DB.rmAllAccount();
+            }            
         }
     }
 
@@ -371,7 +374,10 @@ public class LedgerState {
         if (isNoStore) {
             return true;
         } else {
-            return DB.insertAccount(account);
+            if(!isNoSQL){
+                return DB.insertAccount(account);
+            }
+            return true;
         }
     }
 
@@ -385,7 +391,10 @@ public class LedgerState {
         if (isNoStore) {
             return true;
         } else {
-            return DB.insertAccount(accounts);
+            if(!isNoSQL){
+                return DB.insertAccount(accounts);
+            }
+            return true;
         }
     }
 
@@ -399,7 +408,10 @@ public class LedgerState {
         if (isNoStore) {
             return true;
         } else {
-            return DB.updateAccount(ar);
+            if(!isNoSQL){
+                return DB.updateAccount(ar);
+            }
+            return true;
         }
     }
 
