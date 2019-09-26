@@ -58,7 +58,8 @@ public class IMTree implements Serializable {
      */
     public int calcLeafIndex(String key) {
         int n;
-        if (height % 4 == 0) { // 當樹高為4的倍數時用這個做法
+        if ((height-1) % 4 == 0) { // 當(樹高-1)為4的倍數時用這個做法
+            System.out.println("1");
             n = height / 4;
             String subKey = key.substring(0, 5); // 只需取得最左側n位
             int index = HashUtils.hex2dec(subKey) + shiftIndex;
