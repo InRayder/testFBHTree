@@ -57,11 +57,25 @@ public class IMTree implements Serializable {
      * @return 對應的葉子節點
      */
     public int calcLeafIndex(String key) {
+        int n;
+        if (height % 4 == 0) { // 當樹高為4的倍數時用這個做法
+            n = height / 4;
+            String subKey = key.substring(0, 5); // 只需取得最左側n位
+            int index = HashUtils.hex2dec(subKey) + shiftIndex;
+            // System.out.println("address: "+key+"\nindex: "+index);
+            return index;
+        } else { // 當樹高非4的倍數時，用學長原本的做法
+            byte[] digest = HashUtils.sha256(key.getBytes());
+            int index = 0;
 
-        String subKey = key.substring(0, 5); // 只需取得最左側5位
-        int index = HashUtils.hex2dec(subKey) + shiftIndex;
-        // System.out.println("address: "+key+"\nindex: "+index);
-        return index;
+            if (digest.length >= 4) {
+                for (int i = 0; i < 4; i++) {
+                    index += digest[i] << (i * 8);
+                }
+            }
+            return (1 << (height - 1)) + Math.abs(index) % (1 << (height - 1));
+        }
+
     }
 
     // public int calcLeafIndex(String key) {
