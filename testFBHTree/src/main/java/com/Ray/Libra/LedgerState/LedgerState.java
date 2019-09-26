@@ -27,7 +27,7 @@ public class LedgerState {
     // private LinkedHashMap<String, AccountResource> ars = null;
     // private List<String> keys = null;
 
-    int tree_h = 21;
+    int tree_h = 17;
     IMTree imt = new IMTree(tree_h);
     SMTree smt = new SMTree();
     boolean isIMT;// true == IMT, false == SMT
