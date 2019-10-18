@@ -61,6 +61,15 @@ public class HashUtils {
         return Integer.parseInt(s, 16);
     }
 
+    public static String binary(byte[] bytes, int radix){
+        int Output_Length = bytes.length * 2;
+        String output = new BigInteger(1, bytes).toString(radix);// 這裡的1代表正數
+        while(output.length() < Output_Length) {
+            output = "0"+output;
+        }   
+		return output;
+	}
+
     public static byte[] sha256(byte[]... bytesArr) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -160,6 +169,9 @@ public class HashUtils {
 
         String a = "4474aa4d1d9428df";
         System.out.println(HashUtils.hex2bin(a, true));
+
+        byte[] b = {(byte) 0x01};
+        System.out.println(HashUtils.binary(b, 16));
 
     }
 }

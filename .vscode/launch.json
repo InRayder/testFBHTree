@@ -4,7 +4,27 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - NibblePath",
+            "request": "launch",
+            "mainClass": "com.Ray.JMTree.NibblePath",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - JMTree",
+            "request": "launch",
+            "mainClass": "com.Ray.JMTree.JMTree",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Ranage",
+            "request": "launch",
+            "mainClass": "com.Ray.JMTree.Ranage",
+            "projectName": "testFBHTree"
+        },
         {
             "type": "java",
             "name": "CodeLens (Launch) - test",
