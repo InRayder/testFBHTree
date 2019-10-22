@@ -26,7 +26,7 @@ public class NodeType {
      * @return
      */
     public NodeType newEmptyPath(int version) {
-        return new NodeType(version, new NibblePath(new byte[0]));
+        return new NodeType(version, new NibblePath(new byte[0],true));
     }
 
     /**
@@ -56,23 +56,16 @@ public class NodeType {
         // new NodeType(version, nibble_path);
     }
 
-    /**
-     * Generate a random node key with 63 nibbles. 生成具有63個半字節的隨機節點密鑰。
-     */
-    public NodeType random63NibblesNodeKey() {
-        byte[] bytes;
-        try {
-            bytes = HashUtils.hex2byte(HashUtils.sha256(String.valueOf(System.nanoTime())));
-            return new NodeType(0,new NibblePath(bytes));
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;        
-    }
 
-    public static void main(String[] args) {
-        
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        /**
+         * 生成具有63個半字節的隨機節點密鑰。
+         */
+        byte[] bytes;
+        bytes = HashUtils.hex2byte(HashUtils.sha256(String.valueOf(System.nanoTime())));
+        bytes[bytes.length-1] &= 0xf0; 
+        NodeType internal_node_key = new NodeType(0,new NibblePath(bytes,false));
 
         /**
          * test_encode_decode
