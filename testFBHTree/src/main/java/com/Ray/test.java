@@ -1,36 +1,34 @@
 package com.Ray;
 
 import java.math.BigInteger;
-
-import com.Ray.IMTree.IMTree;
+import java.util.BitSet;
 
 /**
  * test
  */
 public class test {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
         // IMTree imt = new IMTree(21);
         // int index = imt.calcLeafIndex("ffffffffffff");
         // System.out.println(index);
-        String[] sy = {"-","\\","|","/"};
-        System.out.print("Progress:");
-        for (int i = 1; i <= 100; i++) {
-            System.out.print(sy[i%4]);
-            Thread.sleep(100);
-            System.out.print("\b");
+        
+        int[] array = new int[] {0,1,2}; 
+        BitSet bs = new BitSet(4);//預設最少就是64bit
 
-            // System.out.print(i + "%");
-
-            // Thread.sleep(100);
-
-
-            // for (int j = 0; j <= String.valueOf(i).length(); j++) {
-            //     System.out.print("\b");
-            // }
+        for (int i : array) {
+            bs.set(i,true);
         }
-        System.out.print("\b");
-        System.out.println("完成");
+
+        System.out.println(bs.size());
+        System.out.println(bs.get(0));
+        System.out.println(bs.get(1));
+        System.out.println(bs.get(2));
+        System.out.println(bs.get(3));
+        System.out.println(bs.get(63));
+        System.out.println(bs.get(64));
+
+
     }
 
     /**
@@ -55,5 +53,31 @@ public class test {
         String output = String.format("%" + Output_Length + "s", Integer.toBinaryString(i)).replace(' ', '0');
 
         System.out.println(output);
+    }
+
+    public static void loading() {
+        String[] sy = { "-", "\\", "|", "/" };
+        System.out.print("Progress:");
+        for (int i = 1; i <= 100; i++) {
+            System.out.print(sy[i % 4]);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.print("\b");
+
+            // System.out.print(i + "%");
+
+            // Thread.sleep(100);
+
+
+            // for (int j = 0; j <= String.valueOf(i).length(); j++) {
+            //     System.out.print("\b");
+            // }
+        }
+        System.out.print("\b");
+        System.out.println("完成");
     }
 }
