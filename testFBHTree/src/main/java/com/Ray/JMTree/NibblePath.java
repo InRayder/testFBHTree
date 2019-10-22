@@ -29,7 +29,7 @@ public class NibblePath {
      * 
      * @param b
      */
-    public NibblePath(byte[] bytes,boolean isEven) {
+    public NibblePath(byte[] bytes, boolean isEven) {
         this.bytes = bytes;
         // int a = bytes.length;
         // HashUtils hs = new HashUtils();
@@ -49,6 +49,10 @@ public class NibblePath {
      */
     public int getNumNibbles() {
         return this.num_nibbles;
+    }
+
+    public byte[] getBytes() {
+        return this.bytes;
     }
 
     /**
@@ -76,7 +80,7 @@ public class NibblePath {
          * *
          */
         if (num_nibbles % 2 == 0) {// 目前長度是偶數
-            byte[] t_byte = Arrays.copyOf(bytes, bytes.length);// 複製陣列
+            byte[] t_byte = Arrays.copyOf(bytes, bytes.length);// 備份陣列
             bytes = new byte[bytes.length + 1];
             System.arraycopy(t_byte, 0, bytes, 0, t_byte.length);// 複製陣列
             bytes[bytes.length - 1] = (byte) (nibble << 4);
@@ -97,16 +101,22 @@ public class NibblePath {
         // }
         /**
          * 偶數 <br>
-         * 0x12 <br>
+         * 0x12, 0x34 => 0x12, 0x30 (直接覆蓋最後一個)<br>
          * 奇數 <br>
-         * 0x10 <br>
+         * 0x12, 0x30 => 0x12 (長度會減1))<br>
          */
         byte popByte = bytes[bytes.length - 1];
         if (num_nibbles % 2 == 0) { // 目前路徑長度是偶數
             popByte = (byte) (popByte & 0x0f);
+            bytes[bytes.length - 1] = (byte) (bytes[bytes.length - 1] & 0xf0);//(直接覆蓋最後一個)
         } else { // 目前路徑長度是奇數
             popByte = (byte) (popByte >>> 4);
+            byte[] t_byte = Arrays.copyOf(bytes, bytes.length-1);// 備份陣列
+            bytes = new byte[bytes.length - 1];
+            System.arraycopy(t_byte, 0, bytes, 0, t_byte.length);// 複製陣列
+            
         }
+        
 
         this.num_nibbles--;
 
@@ -167,7 +177,7 @@ public class NibblePath {
         return new NibbleIterator(this, 0, num_nibbles);
     }
 
-    private static class BitIterator {
+    public static class BitIterator {
 
         private NibblePath nibble_path;
         private Ranage pos;
@@ -199,7 +209,7 @@ public class NibblePath {
 
     }
 
-    private static class NibbleIterator {
+    public static class NibbleIterator {
 
         private NibblePath nibble_path;
         private Ranage pos;
@@ -242,9 +252,9 @@ public class NibblePath {
      */
     public static void main(String[] args) {
         byte[] bytes1 = { (byte) 0xab, (byte) 0x34, (byte) 0x56 };// 偶數
-        NibblePath np1 = new NibblePath(bytes1,true);
+        NibblePath np1 = new NibblePath(bytes1, true);
         byte[] bytes2 = { (byte) 0xcd, (byte) 0x34, (byte) 0x50 };// 奇數
-        NibblePath np2 = new NibblePath(bytes2,false);
+        NibblePath np2 = new NibblePath(bytes2, false);
 
         /**
          * test_nibble_path_fmt <br>
@@ -303,7 +313,7 @@ public class NibblePath {
          */
         System.out.println("\ntest_get_bit");
         byte[] bytes_get_bit = { (byte) 0x01, (byte) 0x02 };
-        NibblePath np_get_bit = new NibblePath(bytes_get_bit,true);
+        NibblePath np_get_bit = new NibblePath(bytes_get_bit, true);
         System.out.println(np_get_bit.getBytesStr());// 0x0102
         System.out.println(np_get_bit.getBit(0));// fales
         System.out.println(np_get_bit.getBit(3));// fales
@@ -317,7 +327,7 @@ public class NibblePath {
          */
         System.out.println("\ntest_bit_iter");
         byte[] bytes_bit_iter = { (byte) 0xc3, (byte) 0xa0 };
-        NibblePath np_bit_iter = new NibblePath(bytes_bit_iter,false);
+        NibblePath np_bit_iter = new NibblePath(bytes_bit_iter, false);
         BitIterator bit_iter = np_bit_iter.bits();
         System.out.println(np_bit_iter.getBytesStr());// 0xc3a
         System.out.println(np_bit_iter.num_nibbles);
@@ -334,10 +344,10 @@ public class NibblePath {
         System.out.println(bit_iter.IteratorNext());// true
         System.out.println();
         // a: 0b1010
-        System.out.println(bit_iter.DoubleEndedIterator());// false
         System.out.println(bit_iter.DoubleEndedIterator());// true
         System.out.println(bit_iter.DoubleEndedIterator());// false
         System.out.println(bit_iter.DoubleEndedIterator());// true
+        System.out.println(bit_iter.DoubleEndedIterator());// false
 
         /**
          * test_push <br>
@@ -352,7 +362,7 @@ public class NibblePath {
         System.out.println("==even==");
         byte[] bytes_push_even = { (byte) 0x12 };
         byte byte_add_even = (byte) 0x03;
-        NibblePath np_push_even = new NibblePath(bytes_push_even,true);
+        NibblePath np_push_even = new NibblePath(bytes_push_even, true);
         System.out.println(np_push_even.getBytesStr()); // 12
         np_push_even.push(byte_add_even);
         System.out.println(np_push_even.getBytesStr()); // 123
@@ -360,8 +370,8 @@ public class NibblePath {
         System.out.println("==odd==");
         byte[] bytes_push_odd = { (byte) 0x12, (byte) 0x30 };
         byte byte_add_odd = (byte) 0x04;
-        NibblePath np_push_odd = new NibblePath(bytes_push_odd,false);
-        System.out.println(np_push_odd.getBytesStr()); //123
+        NibblePath np_push_odd = new NibblePath(bytes_push_odd, false);
+        System.out.println(np_push_odd.getBytesStr()); // 123
         np_push_odd.push(byte_add_odd);
         System.out.println(np_push_odd.getBytesStr()); // 1234
 
@@ -372,14 +382,14 @@ public class NibblePath {
 
         System.out.println("==even==");
         byte[] bytes_pop_even = { (byte) 0x12, (byte) 0x34 };
-        NibblePath np_pop_even = new NibblePath(bytes_pop_even,true);
+        NibblePath np_pop_even = new NibblePath(bytes_pop_even, true);
         System.out.println(np_pop_even.getBytesStr()); // 1234
         System.out.println(np_pop_even.pop()); // 4
         System.out.println(np_pop_even.getBytesStr()); // 123
 
         System.out.println("==odd==");
         byte[] bytes_pop_odd = { (byte) 0x12, (byte) 0x30 };
-        NibblePath np_pop_odd = new NibblePath(bytes_pop_odd,false);
+        NibblePath np_pop_odd = new NibblePath(bytes_pop_odd, false);
         System.out.println(np_pop_odd.getBytesStr()); // 123
         System.out.println(np_pop_odd.pop()); // 3
         System.out.println(np_pop_odd.getBytesStr()); // 12
