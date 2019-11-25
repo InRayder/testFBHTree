@@ -23,7 +23,7 @@ public class AccountResource implements Serializable {
      */
     public AccountResource(String authentication_key) {
         this.authentication_key = authentication_key;
-        this.balance = 0;
+        this.balance = 10000000; // 測試用 預設存10000000
         this.sequence_number = 0;
         this.sent_events_counts = 0;
         this.received_events_count = 0;

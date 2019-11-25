@@ -137,10 +137,10 @@ public class UITEST {
                         Account1 = tokens[2];
                         Account2 = tokens[3];
                         time = Integer.valueOf(tokens[4]) / 2;
-                        ls.MintLibra(Account1, 1000);
+                        // ls.MintLibra(Account1, 1000);
                         for (int i = 0; i < time; i++) {
-                            ls.P2PTransaction(Account1, Account2, 10);
-                            ls.P2PTransaction(Account2, Account1, 10);
+                            ls.P2PTransaction(Account1, Account2, 1);
+                            ls.P2PTransaction(Account2, Account1, 1);
                         }
                     } else {// 隨機兩帳號
                         List<String> keys = ls.keys;
@@ -153,9 +153,9 @@ public class UITEST {
                             int k = s % keys.size();
                             Account1 = keys.get(k);
                             Account2 = keys.get((k + 1) % keys.size());
-                            ls.MintLibra(Account1, 1000);
-                            ls.P2PTransaction(Account1, Account2, 10);
-                            ls.P2PTransaction(Account2, Account1, 10);
+                            // ls.MintLibra(Account1, 1000);
+                            ls.P2PTransaction(Account1, Account2, 1);
+                            ls.P2PTransaction(Account2, Account1, 1);
 
                             for (int j = 0; j < String.valueOf(i).length(); j++) {
                                 System.out.print("\b");
@@ -164,6 +164,14 @@ public class UITEST {
                     }
 
                     t = System.nanoTime() - t;
+                    // Get the Java runtime
+                    Runtime runtime = Runtime.getRuntime();
+                    // Run the garbage collector
+                    runtime.gc();
+                    // Calculate the used memory
+                    long memory = runtime.totalMemory() - runtime.freeMemory();
+                    System.out.println("Used memory is bytes: " + memory +" Byte");
+                    System.out.println("Used memory is megabytes: " + bytesToMegabytes(memory)+" MB");
                     System.out.println("run time:" + (double) t / 1000000 + "ms");
 
                     break;
