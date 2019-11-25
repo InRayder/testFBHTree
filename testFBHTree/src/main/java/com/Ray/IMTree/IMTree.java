@@ -2,6 +2,7 @@ package com.Ray.IMTree;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 
@@ -14,6 +15,7 @@ import com.Ray.Utils.HashUtils;
  */
 public class IMTree implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private static final char SLICE_DELIMITER = '.';
     private static final int ESTIMATED_SLICE_LENGTH = 8192;
 
@@ -218,8 +220,12 @@ public class IMTree implements Serializable {
     /**
      * Basic node for IMTree.
      */
-    private static class Node implements Serializable {
+    public static class Node implements Serializable {
 
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
         private final int id;
         private final boolean isLeaf;
         private boolean dirty;
@@ -229,7 +235,7 @@ public class IMTree implements Serializable {
         private final Node leftChild;
         private final Node rightChild;
 
-        private LinkedHashMap<String, byte[]> contents;
+        private HashMap<String, byte[]> contents;
         // private ArrayList<String> contentKeys;
         // private ArrayList<byte[]> contentValues;
 
@@ -253,7 +259,7 @@ public class IMTree implements Serializable {
 
         public void put(String key, byte[] bytes) {
             if (contents == null) {
-                contents = new LinkedHashMap<>();
+                contents = new HashMap<>();
             }
             contents.put(key, bytes);
             setDirty(true);
@@ -316,7 +322,7 @@ public class IMTree implements Serializable {
         public Collection<byte[]> getContents() {
             if (isLeaf) {
                 if (contents == null) {
-                    contents = new LinkedHashMap<>();
+                    contents = new HashMap<>();
                 }
                 return contents.values();
             } else {

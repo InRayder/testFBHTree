@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
@@ -22,7 +23,7 @@ public class LedgerState {
 
     private SqlDB DB = new SqlDB();
 
-    private LinkedHashMap<String, AccountResource> ars = new LinkedHashMap<String, AccountResource>();
+    private HashMap<String, AccountResource> ars = new HashMap<String, AccountResource>();
     public List<String> keys = new ArrayList<>();
     // private LinkedHashMap<String, AccountResource> ars = null;
     // private List<String> keys = null;
@@ -251,7 +252,7 @@ public class LedgerState {
             }
         } else {// mem不存在
             if (keys.indexOf(account) != -1) {// storage存在(從SQL匯入)
-                LinkedHashMap<String, AccountResource> tmp_ars = DB.queryAccount(account);
+                HashMap<String, AccountResource> tmp_ars = DB.queryAccount(account);
                 ars.put(account, tmp_ars.get(account));
                 return 2;
             } else {// storage不存在(此帳號尚未被建立)
