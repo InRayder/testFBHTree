@@ -3,7 +3,6 @@ package com.Ray.IMTree;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 
 import com.Ray.Utils.HashUtils;
@@ -19,10 +18,10 @@ public class IMTree implements Serializable {
     private static final char SLICE_DELIMITER = '.';
     private static final int ESTIMATED_SLICE_LENGTH = 8192;
 
-    private final int height;
-    private final Node[] nodes;
+    private  int height;
+    private  Node[] nodes;
 
-    private final int shiftIndex;// 最左側葉子index
+    private  int shiftIndex;// 最左側葉子index
 
     /**
      * 建構具有初始高度的 IMTree.
@@ -31,6 +30,11 @@ public class IMTree implements Serializable {
      * @throws IllegalArgumentException if the specified initial tree height is
      *                                  smaller than 1
      */
+    
+     public IMTree(){
+        height = 17;
+     }
+
     public IMTree(int treeHeight) {
         long time = System.nanoTime();
         if (treeHeight <= 0) {
@@ -226,18 +230,22 @@ public class IMTree implements Serializable {
          *
          */
         private static final long serialVersionUID = 1L;
-        private final int id;
-        private final boolean isLeaf;
+        private  int id;
+        private  boolean isLeaf;
         private boolean dirty;
         private byte[] contentDigest;
         private String contentDigestHexStr;
 
-        private final Node leftChild;
-        private final Node rightChild;
+        private  Node leftChild;
+        private  Node rightChild;
 
         private HashMap<String, byte[]> contents;
         // private ArrayList<String> contentKeys;
         // private ArrayList<byte[]> contentValues;
+
+        public Node(){
+
+        }
 
         public Node(int id, Node leftChild, Node rightChild) {
             this.id = id;
