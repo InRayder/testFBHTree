@@ -70,7 +70,7 @@
             "request": "launch",
             "mainClass": "com.Ray.Libra.UITEST",
             "projectName": "testFBHTree",
-            "vmArgs": "-Xmx4096m -Xms300m"
+            // "vmArgs": "-Xmx16384m -Xms300m"
         },
         {
             "type": "java",

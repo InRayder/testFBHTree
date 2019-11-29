@@ -27,7 +27,7 @@ public class LedgerState {
     // private LinkedHashMap<String, AccountResource> ars = null;
     // private List<String> keys = null;
 
-    int tree_h = 17;
+    int tree_h = 21;
     IMTree imt = new IMTree(tree_h);
     SMTree smt = new SMTree();
     boolean isIMT;// true == IMT, false == SMT
@@ -492,6 +492,14 @@ public class LedgerState {
         return true;
     }
 
+
+    /**
+     * 秀出碰撞次數
+     */
+    public void showCollision(){
+        System.out.println("平均碰撞:"+imt.AVG_collision());
+        System.out.println("最小碰撞:"+imt.MIN_collision());
+    }
     /**
      * =========================== <br>
      * ==以下操作會改變LedgerState== <br>

@@ -222,6 +222,39 @@ public class IMTree implements Serializable {
     }
 
     /**
+     * @return file's Average collision number (@return文件的平均碰撞數)
+     */
+    public float AVG_collision() {
+        int Leaf_min = 1 << (height - 1);
+        int Leaf_max = 1 << (height);
+        int total = 0;
+        int nonemptycount = 0;
+        for (int i = Leaf_min; i < Leaf_max; i++) {
+            if (!nodes[i].getContents().isEmpty()) {
+                nonemptycount += 1;
+                total += nodes[i].getContents().size();
+            }
+        }
+        float AVG = (float) total / nonemptycount;
+        return AVG;
+    }
+
+    public int MIN_collision() {
+        int Leaf_min = 1 << (height - 1);
+        int Leaf_max = 1 << (height);
+        int MIN = 1000001;
+
+        for (int i = Leaf_min; i < Leaf_max; i++) {
+
+            if (MIN > nodes[i].getContents().size()) {
+                MIN = nodes[i].getContents().size();
+            }
+
+        }
+        return MIN;
+    }
+
+    /**
      * Basic node for IMTree.
      */
     public static class Node implements Serializable {

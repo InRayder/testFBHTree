@@ -42,6 +42,9 @@ public class UITEST {
         showText += "a c <num>\t| 創造 <num> 個虛擬帳戶。\n";
         showText += "a la\t| 列出所有的帳戶。\n";
         showText += "a rm\t| 刪除所有的帳戶。\n";
+        if (now_tree.equals("imt")) {
+            showText += "a coll\t| 帳戶在樹中的碰撞次數。\n";
+        }
         showText += "\n";
         showText += "=====查詢相關(q)=====\n";
         showText += "q as <address>\t| 查詢 <address> 帳戶的內容。\n";
@@ -93,8 +96,8 @@ public class UITEST {
                     runtime.gc();
                     // Calculate the used memory
                     long memory = runtime.totalMemory() - runtime.freeMemory();
-                    System.out.println("Used memory is bytes: " + memory +" Byte");
-                    System.out.println("Used memory is megabytes: " + bytesToMegabytes(memory)+" MB");
+                    System.out.println("Used memory is bytes: " + memory + " Byte");
+                    System.out.println("Used memory is megabytes: " + bytesToMegabytes(memory) + " MB");
 
                     time = System.nanoTime() - time;
                     System.out.println("總執行時間： " + (double) time / 1000000 + " ms");
@@ -105,6 +108,9 @@ public class UITEST {
                     break;
                 case "rm":
                     ls.rmAllAccount();
+                    break;
+                case "coll":
+                    ls.showCollision();
                     break;
                 }
                 break;
@@ -149,8 +155,12 @@ public class UITEST {
                         System.out.print("round:");
                         for (int i = 0; i < time; i++) {
                             System.out.print(i);
-                            int s = (int) System.currentTimeMillis();
+                            int s = (int) System.nanoTime();
+                            if (s < 0) {
+                                s = 0 - s;
+                            }
                             int k = s % keys.size();
+                            // System.out.println("\ns:" + s + "\nK:" + k);
                             Account1 = keys.get(k);
                             Account2 = keys.get((k + 1) % keys.size());
                             // ls.MintLibra(Account1, 1000);
@@ -170,8 +180,8 @@ public class UITEST {
                     runtime.gc();
                     // Calculate the used memory
                     long memory = runtime.totalMemory() - runtime.freeMemory();
-                    System.out.println("Used memory is bytes: " + memory +" Byte");
-                    System.out.println("Used memory is megabytes: " + bytesToMegabytes(memory)+" MB");
+                    System.out.println("Used memory is bytes: " + memory + " Byte");
+                    System.out.println("Used memory is megabytes: " + bytesToMegabytes(memory) + " MB");
                     System.out.println("run time:" + (double) t / 1000000 + "ms");
 
                     break;
