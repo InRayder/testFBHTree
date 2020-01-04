@@ -3,22 +3,22 @@ package com.Ray.JMTree;
 import java.util.LinkedList;
 
 /**
- * Ranage
+ * Range
  */
-public class Ranage {
+public class Range {
 
-    private LinkedList<Integer> ranage = new LinkedList<Integer>();
-    // private int[] ranage;
+    private LinkedList<Integer> range = new LinkedList<Integer>();
+    // private int[] range;
     private int startI;
     private int endI;
     private int size;
 
-    public Ranage(int start, int end) {
+    public Range(int start, int end) {
         this.startI = start;
         this.endI = end;
         this.size = end - start;
         for (int i = start; i < end; i++) {
-            this.ranage.add(i);
+            this.range.add(i);
         }
     }
 
@@ -28,17 +28,17 @@ public class Ranage {
      * @return
      */
     public int start() {
-        if (ranage.isEmpty()) {
+        if (range.isEmpty()) {
             return endI;
         }
-        return ranage.getFirst();
+        return range.getFirst();
     }
 
     /**
      * 窺視尾位元
      */
     public int end() {
-        return ranage.getLast();
+        return range.getLast();
     }
 
     /**
@@ -47,11 +47,11 @@ public class Ranage {
      * @return
      */
     public int next() {
-        if (ranage.isEmpty()) {
+        if (range.isEmpty()) {
             return endI;
         }
         int tmp = start();
-        ranage.removeFirst();
+        range.removeFirst();
         return tmp;
     }
 
@@ -62,19 +62,19 @@ public class Ranage {
      */
     public int next_back() {
         int tmp = end();
-        ranage.removeLast();
+        range.removeLast();
         return tmp;
 
     }
 
     public static void main(String[] args) {
-        Ranage r = new Ranage(0, 10);
-        System.out.println(r.start());
-        System.out.println(r.end());
-        System.out.println(r.next());
-        System.out.println(r.next());
-        System.out.println(r.next_back());
-        System.out.println(r.end());
+        Range r = new Range(0, 10);
+        System.out.println(r.start()); // 0
+        System.out.println(r.end()); // 9
+        System.out.println(r.next()); // 0
+        System.out.println(r.next()); // 1
+        System.out.println(r.next_back()); //9
+        System.out.println(r.end()); //8
 
     }
 }

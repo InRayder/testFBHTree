@@ -59,6 +59,13 @@ public class AccountResource implements Serializable {
     }
 
     /**
+     * 返回 byte[]值
+     * @return
+     */
+    public byte[] getHash(){
+        return HashUtils.hex2byte(this.getRowData());
+    }
+    /**
      * 這邊目前是顯示的內容
      * @return String
      */

@@ -13,23 +13,39 @@ public class test {
         // int index = imt.calcLeafIndex("ffffffffffff");
         // System.out.println(index);
         
-        int[] array = new int[] {0,1,2}; 
-        BitSet bs = new BitSet(4);//預設最少就是64bit
+        // int[] array = new int[] {0,1,2}; 
+        // BitSet bs = new BitSet(4);//預設最少就是64bit
 
-        for (int i : array) {
-            bs.set(i,true);
-        }
+        // for (int i : array) {
+        //     bs.set(i,true);
+        // }
 
-        System.out.println(bs.size());
-        System.out.println(bs.get(0));
-        System.out.println(bs.get(1));
-        System.out.println(bs.get(2));
-        System.out.println(bs.get(3));
-        System.out.println(bs.get(63));
-        System.out.println(bs.get(64));
+        // System.out.println(bs.size());
+        // System.out.println(bs.get(0));
+        // System.out.println(bs.get(1));
+        // System.out.println(bs.get(2));
+        // System.out.println(bs.get(3));
+        // System.out.println(bs.get(63));
+        // System.out.println(bs.get(64));
 
+        System.out.println((10 & (1<<2)-1));
+        System.out.println(count_ones(1));
+        System.out.println(count_ones(2));
+        System.out.println(count_ones(4));
+        System.out.println(count_ones(8));
+        System.out.println(count_ones(10));
 
     }
+
+    private static boolean count_ones(int n) {
+        for (int i = 1; i <= n; i *= 2) {
+            if (i == n) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * 輸入葉子節點的 index 可以輸出一直到 rootHash 之間經過的 node

@@ -24,18 +24,20 @@ public class NibblePath {
      */
     private byte[] bytes;
 
-    /**
-     * 創建一個新的半字節路徑
-     * 
-     * @param b
-     */
+    public boolean isEven;
+
+     /**
+      * 創建一個新的半字節路徑
+      * @param bytes 輸入路徑
+      * @param isEven 該路徑是否為偶數長度
+      */
     public NibblePath(byte[] bytes, boolean isEven) {
         this.bytes = bytes;
         // int a = bytes.length;
         // HashUtils hs = new HashUtils();
         // String hex_string = hs.binary(bytes, 16);
         // char t = hex_string.charAt(a * 2 - 1);
-
+        this.isEven = isEven;
         if (isEven) {
             this.num_nibbles = bytes.length * 2;// 若為偶數
         } else {
@@ -53,6 +55,10 @@ public class NibblePath {
 
     public byte[] getBytes() {
         return this.bytes;
+    }
+
+    public boolean getIsEven(){
+        return this.isEven;
     }
 
     /**
@@ -89,6 +95,7 @@ public class NibblePath {
         }
 
         this.num_nibbles++;
+        this.isEven = !isEven;
     }
 
     /**
@@ -119,7 +126,7 @@ public class NibblePath {
         
 
         this.num_nibbles--;
-
+        this.isEven = !isEven;
         return popByte;
     }
 
@@ -180,11 +187,11 @@ public class NibblePath {
     public static class BitIterator {
 
         private NibblePath nibble_path;
-        private Ranage pos;
+        private Range pos;
 
         public BitIterator(NibblePath nibble_path, int pos) {
             this.nibble_path = nibble_path;
-            this.pos = new Ranage(0, pos * 4);
+            this.pos = new Range(0, pos * 4);
         }
 
         /**
@@ -212,18 +219,18 @@ public class NibblePath {
     public static class NibbleIterator {
 
         private NibblePath nibble_path;
-        private Ranage pos;
+        private Range pos;
         private int start;
 
         public NibbleIterator(NibblePath nibble_path, int pos) {
             this.nibble_path = nibble_path;
-            this.pos = new Ranage(0, pos);
+            this.pos = new Range(0, pos);
             this.start = 0;
         }
 
         public NibbleIterator(NibblePath nibble_path, int start, int end) {
             this.nibble_path = nibble_path;
-            this.pos = new Ranage(start, end);
+            this.pos = new Range(start, end);
             this.start = start;
         }
 

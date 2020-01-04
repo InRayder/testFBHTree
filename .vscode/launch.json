@@ -4,7 +4,27 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TreeCache",
+            "request": "launch",
+            "mainClass": "com.Ray.JMTree.TreeCache",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - NodeKey",
+            "request": "launch",
+            "mainClass": "com.Ray.JMTree.NodeKey",
+            "projectName": "testFBHTree"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - InternalNode",
+            "request": "launch",
+            "mainClass": "com.Ray.JMTree.Node.InternalNode",
+            "projectName": "testFBHTree"
+        },
         {
             "type": "java",
             "name": "CodeLens (Launch) - KryoObject",
@@ -69,8 +89,7 @@
             "console": "integratedTerminal",
             "request": "launch",
             "mainClass": "com.Ray.Libra.UITEST",
-            "projectName": "testFBHTree",
-            // "vmArgs": "-Xmx16384m -Xms300m"
+            "projectName": "testFBHTree"
         },
         {
             "type": "java",
